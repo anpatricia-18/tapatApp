@@ -1,0 +1,55 @@
+classDiagram
+    class User {
+        +id: int
+        +username: varchar(20)
+        +password: varchar(20)
+        +email: varchar(50)
+        +consultarInfants(): void
+        +iniciarSessio(): boolean
+    }
+
+    class Rol {
+        +id: int
+        +type_rol: varchar(20)
+    }
+
+    class Child {
+        +id: int
+        +child_name: varchar(50)
+        +sleep_average: int
+        +treatment_id: int
+        +time: int
+    }
+
+    class Treatment {
+        +id: int
+        +name: varchar(11)
+    }
+
+    class Tap {
+        +id: int
+        +child_id: int
+        +status_id: int
+        +user_id: int
+        +init: datetime
+        +end: datetime
+    }
+
+    class Status {
+        +id: int
+        +name: varchar(40)
+    }
+
+    class RelationUserChild {
+        +user_id: int
+        +child_id: int
+        +rol_id: int
+    }
+    
+    User --> Rol : "1" -- "1"  
+    User --> RelationUserChild : "1" -- "N"
+    RelationUserChild --> Child : "N" -- "1"
+    Child --> Treatment : "1" -- "1"
+    Child --> Tap : "1" -- "N"
+    Tap --> Status : "1" -- "1"
+    Tap --> User : "N" -- "1"
