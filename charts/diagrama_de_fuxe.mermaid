@@ -1,0 +1,6 @@
+flowchart TD
+    A[Cuidador - Vista de Login] -->|Envia username| B[Servidor - DAO]
+    B -->|Consulta dades infant| C[DAO - Base de Dades]
+    C -->|Retorna dades infant| B
+    B -->|Resposta amb dades infant| D[Cuidador - Vista d'infant]
+    D -->|Mostra informació de l'infant| E[Detall de l'infant]
