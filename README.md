@@ -23,3 +23,4 @@ L'objectiu de TapatApp és proporcionar a totes les famílies afectades per cata
 - Possibilitat de crear una web quan l'aplicació estigui en producció.
 
 [Requeriments tècnics](requerimentstecnics.md)
+[HTTP Request i Response](httprequest_response.md)
