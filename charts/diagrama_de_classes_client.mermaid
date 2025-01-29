@@ -1,0 +1,22 @@
+classDiagram
+
+class ClientView {
+    +inputUsername(): void
+    +showUserInfo(user: User): void
+}
+
+class ClientDAOUser {
+    +getUserByUsername(username: String): User
+}
+
+class User {
+    -username: String
+    -email: String
+    -age: int
+    +getDetails(): String
+}
+
+ClientView --> ClientDAOUser : Envia dades username
+ClientDAOUser --> User : Petició HTTP GET username
+User --> ClientDAOUser : Resposta HTTP amb JSON user if exists
+ClientDAOUser --> ClientView : Dades processades
