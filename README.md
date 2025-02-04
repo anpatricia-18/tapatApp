@@ -46,10 +46,10 @@ Què necessitem per cada End-point
    - Codi 200:
 
                 {
-                "email": "user1@gmail.com",
-                "id": 1,
+                "email": "user2@gmail.com",
+                "id": 2,
                 "password": "12345",
-                "username": "usuari1"
+                "username": "usuari2"
                 }
 
    - Codi 404 (si l'username introduït no existeix):
