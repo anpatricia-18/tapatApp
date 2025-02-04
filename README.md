@@ -46,10 +46,10 @@ Què necessitem per cada End-point
    - Codi 200:
 
                 {
-                "email": "user2@gmail.com",
+                "email": "user2@proven.cat",
                 "id": 2,
-                "password": "12345",
-                "username": "usuari2"
+                "password": "123",
+                "username": "user2"
                 }
 
    - Codi 404 (si l'username introduït no existeix):
