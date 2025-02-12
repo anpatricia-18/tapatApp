@@ -19,3 +19,8 @@ flowchart TD
     F -->|Usuari cuidador| J[Vista Cuidador]
     J -->|Visualitza nen/s vinculats| K[Llista d'infants]
     K -->|Selecciona un infant| L[Vista de l'Infant]
+
+    %% Estats de l'infant
+    L --> N[Dormit]
+    L --> O[Despert amb parche]
+    L --> P[Despert sense parche]
