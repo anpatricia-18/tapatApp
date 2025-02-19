@@ -1,83 +1,87 @@
-import dadesServer as dades
 from flask import Flask, jsonify, request
 
 app = Flask(__name__)
 
-# Dades d'exemple
-children = [{"id": 1, "name": "Child 1"}, {"id": 2, "name": "Child 2"}]
-tap = [{"id": 1, "name": "Tap 1"}, {"id": 2, "name": "Tap 2"}]
-roles = [{"id": 1, "name": "Role 1"}, {"id": 2, "name": "Role 2"}]
-status = [{"id": 1, "name": "Status 1"}, {"id": 2, "name": "Status 2"}]
-treatment = [{"id": 1, "name": "Treatment 1"}, {"id": 2, "name": "Treatment 2"}]
-relation_user_child = [{"user_id": 1, "child_id": 1}]
+# Datos de ejemplo
+children = [
+    {"id": 1, "name": "Child 1"},
+    {"id": 2, "name": "Child 2"}
+]
 
-# Endpoints per a cada entitat
+taps = [
+    {"id": 1, "name": "Tap 1"},
+    {"id": 2, "name": "Tap 2"}
+]
 
-# Children
-@app.route('/child', methods=['GET'])
-def get_child():
+roles = [
+    {"id": 1, "name": "Role 1"},
+    {"id": 2, "name": "Role 2"}
+]
+
+statuses = [
+    {"id": 1, "name": "Status 1"},
+    {"id": 2, "name": "Status 2"}
+]
+
+treatments = [
+    {"id": 1, "name": "Treatment 1"},
+    {"id": 2, "name": "Treatment 2"}
+]
+
+relation_user_child = [
+    {"user_id": 1, "child_id": 1}
+]
+
+# Endpoints para cada entidad
+@app.route('/children', methods=['GET'])
+def get_children():
     return jsonify(children)
 
-@app.route('/child/<int:id>', methods=['GET'])
+@app.route('/children/<int:id>', methods=['GET'])
 def get_child_by_id(id):
     child = next((c for c in children if c['id'] == id), None)
-    if child:
-        return jsonify(child)
-    return jsonify({"error": "Child not found"}), 404
+    return jsonify(child) if child else (jsonify({"error": "Child not found"}), 404)
 
-# Taps
-@app.route('/tap', methods=['GET'])
-def get_tap():
-    return jsonify(tap)
+@app.route('/taps', methods=['GET'])
+def get_taps():
+    return jsonify(taps)
 
-@app.route('/tap/<int:id>', methods=['GET'])
+@app.route('/taps/<int:id>', methods=['GET'])
 def get_tap_by_id(id):
-    tap_data = next((t for t in tap if t['id'] == id), None)
-    if tap_data:
-        return jsonify(tap_data)
-    return jsonify({"error": "Tap not found"}), 404
+    tap = next((t for t in taps if t['id'] == id), None)
+    return jsonify(tap) if tap else (jsonify({"error": "Tap not found"}), 404)
 
-# Roles
 @app.route('/roles', methods=['GET'])
 def get_roles():
     return jsonify(roles)
 
-@app.route('/role/<int:id>', methods=['GET'])
+@app.route('/roles/<int:id>', methods=['GET'])
 def get_role_by_id(id):
     role = next((r for r in roles if r['id'] == id), None)
-    if role:
-        return jsonify(role)
-    return jsonify({"error": "Role not found"}), 404
+    return jsonify(role) if role else (jsonify({"error": "Role not found"}), 404)
 
-# Statuses
-@app.route('/status', methods=['GET'])
-def get_status():
-    return jsonify(status)
+@app.route('/statuses', methods=['GET'])
+def get_statuses():
+    return jsonify(statuses)
 
-@app.route('/status/<int:id>', methods=['GET'])
+@app.route('/statuses/<int:id>', methods=['GET'])
 def get_status_by_id(id):
-    status_data = next((s for s in status if s['id'] == id), None)
-    if status_data:
-        return jsonify(status_data)
-    return jsonify({"error": "Status not found"}), 404
+    status = next((s for s in statuses if s['id'] == id), None)
+    return jsonify(status) if status else (jsonify({"error": "Status not found"}), 404)
 
-# Treatments
-@app.route('/treatment', methods=['GET'])
-def get_treatment():
-    return jsonify(treatment)
+@app.route('/treatments', methods=['GET'])
+def get_treatments():
+    return jsonify(treatments)
 
-@app.route('/treatment/<int:id>', methods=['GET'])
+@app.route('/treatments/<int:id>', methods=['GET'])
 def get_treatment_by_id(id):
-    treatment_data = next((t for t in treatment if t['id'] == id), None)
-    if treatment_data:
-        return jsonify(treatment_data)
-    return jsonify({"error": "Treatment not found"}), 404
+    treatment = next((t for t in treatments if t['id'] == id), None)
+    return jsonify(treatment) if treatment else (jsonify({"error": "Treatment not found"}), 404)
 
-# Relació User-Child
 @app.route('/relation_user_child', methods=['GET'])
 def get_relation_user_child():
     return jsonify(relation_user_child)
 
 # Iniciar el servidor
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host="192.168.144.160", port=10050)
