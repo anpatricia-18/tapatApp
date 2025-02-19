@@ -1,5 +1,3 @@
-# Dades d'exemple amb List
-# Clase User
 class User:
     def __init__(self, id, username, password, email):
         self.id = id
@@ -8,14 +6,13 @@ class User:
         self.email = email
     
     def __str__(self):
-        return self.username + ":" + self.password + ":" + self.email
+        return f"{self.username}:{self.password}:{self.email}"
 
 users = [
     User(id=1, username="mare", password="12345", email="prova@gmail.com"),
     User(id=2, username="pare", password="123", email="prova2@gmail.com")
 ]
 
-# Crear les classes Child, Tap, Role, Status i Treatment
 class Child:
     def __init__(self, id, child_name, sleep_average, treatment_id, time):
         self.id = id
@@ -51,15 +48,15 @@ relation_user_child = [
 ]
 
 class Role:  
-    def __init__(self, id, type_rol):
+    def __init__(self, id, type_role):
         self.id = id
-        self.type_rol = type_rol
+        self.type_role = type_role
 
 roles = [
-    Role(id=1, type_rol='Admin'),
-    Role(id=2, type_rol='Tutor Mare Pare'),
-    Role(id=3, type_rol='Cuidador'),
-    Role(id=4, type_rol='Seguiment')
+    Role(id=1, type_role='Admin'),
+    Role(id=2, type_role='Tutor Mare Pare'),
+    Role(id=3, type_role='Cuidador'),
+    Role(id=4, type_role='Seguiment')
 ]
 
 class Status:  
@@ -74,12 +71,12 @@ statuses = [
     Status(id=4, name="no_eyepatch")
 ]
 
-class Treatments:
+class Treatment:
     def __init__(self, id, name):
         self.id = id
         self.name = name
 
 treatments = [
-    Treatments(id=1, name='Hour'),
-    Treatments(id=2, name='percentage')
+    Treatment(id=1, name='Hour'),
+    Treatment(id=2, name='Percentage')
 ]
