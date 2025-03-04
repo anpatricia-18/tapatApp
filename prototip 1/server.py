@@ -54,8 +54,9 @@ def getUser():
     email = str(request.args.get('email'))
     return "Holi World: Name:" + n + " : email:" +email
 
-@app.route('/prototip/getuser/<string:username>', methods=['GET'])
+@app.route('/prototip/getuser/<username>', methods=['GET'])
 def prototipGetUser(username):
+    print("AAAA",username)
     user = daoUser.getUserByUsername(username)
     if username:
         return jsonify(user)
