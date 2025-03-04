@@ -2,10 +2,12 @@
 
 ##  Implementació Prototip 2
 [Wireframe Prototip 2](wireframe_prototip2.mermaid)
+[Segon Wireframe que vaig fer pensant des de la vista de l'usuari/cuidador/metge](dgm_wireframeprototip2.mermaid)
 
 ### Backend:
 
 [Backend Prototip 2](dgrm_class_backend_p2.mermaid)
+
 
 ***Base de dades***:
 - Importar les dades del usuaris per fer funcionar el servei (DAOUsers).
