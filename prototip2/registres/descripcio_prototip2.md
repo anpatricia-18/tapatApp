@@ -10,44 +10,46 @@
 
 
 ***Base de dades***:
-- Importar les dades del usuaris per fer funcionar el servei (DAOUsers).
-- Importar les dades del nens per fer funcionar el servei (DAOChild).
-- Relacionar obj user & child (relation & treatement).
+    - Usuaris: Informació dels cuidadors, infants i metges.
+    - Infants: Dades específiques de cada nen, incloent el tractament a seguir.
+    - Relacions: Vincle entre cuidadors i infants per gestionar correctament el tractament.
 
 
 ### Frontend:
 
 [Frontend prototip 2](dgm_clase_frontendprototip2.mermaid)
 
-***Vista de Login***:
-- Descripció: pantalla de Login on l'usuari es validarà
-- Inputs: Usuari (email o username) i Contrasenya
-- Botó: "Iniciar sessió", "Registrar-se", "He oblidat la contrasenya"
+***Vista d'Autentificació***:
+- L'usuari accedeix a la Vista de Login i introduirà el seu nom o correu electrònic i la contrasenya.
+- El servidor valida les credencials consultant la base de dades.
+- Si l’usuari té autenticació en dos passos (2FA) activada, es demana un codi addicional.
+- Si la informació és correcta, es concedeix l’accés i es redirigeix segons el seu rol.
 
 ***Vista per Restablir contrasenya***:
 - Descripció: formulari per restablir contrasenya 
 - Inputs: Email, nova contrasenya
 - Botó: "Enviar enllaç de restabliment"
+- - Si hi ha errors, es mostra un missatge d’error i es permet la recuperació de contrasenya mitjançant correu electrònic.
 
 ***Vista de Registre***:
 - Descripció: formulari de Registre d'Usuari 
 - Inputs: Usuari (email o username) i Contrasenya
 - Botó: "Crear compte"
 
-***Vista de Llistat nens***:
-- Descripció: mostra els nens assignats al cuidador
+***Vista de Llistat d'Infants***:
+- Descripció: mostra els infants assignats al cuidador
 - Opcions: Seleccionar nen
 - Botó: "Afegir un nen nou", seleccionar nen (click a sobre)
 
-***Vista per Afegir un nen***:
+***Vista per Afegir un infant***:
 - Descripció: formulari per afegir nen
 - Input: Nom del nen, Edat, tractament (hores o percentatge)
-- Botó: "Afegir", "Cancelar"
+- Botó: "Afegir", "Cancel·lar"
 
-***Vista d'Informació del nen***:
+***Vista d'Informació de l'infant***:
 - Descripció: pantalla per mostrar informació del nen i estat tap
 - Input: estat del tap
-- Botó: "Desar canvis", "Cancelar"
+- Botó: "Desar canvis", "Cancel·lar"
 
-##  Diagrama final arquitectura Prototip 2
-[Arquitectura prototip 2](dgrm_arch_p2.mermaid)
+##  Diagrama d'arquitectura final del Prototip 2
+[Arquitectura prototip 2](dgm_arquitecturap2.mermaid)
