@@ -6,7 +6,7 @@
 
 ### Backend:
 
-[Backend Prototip 2](dgrm_class_backend_p2.mermaid)
+[Backend Prototip 2](dgm_clase_backendprototip2.mermaid)
 
 
 ***Base de dades***:

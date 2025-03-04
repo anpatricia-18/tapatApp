@@ -1,0 +1,87 @@
+---
+title: Diagrama de classes Backend del Prototip 2
+---
+classDiagram
+class Webservice {
+    + showUserInfo(User)
+    + showChildInfo(Child)
+    + showTapInfo(Tap)
+    + authenticateUser(String username, String password)
+    + registerUser(User user)
+    + recoverPassword(String email)
+}
+
+class DAOUser {
+    + User[] Usuaris
+    + getUserById(id)
+    + validateCredentials(String username, String password)
+    + saveUser(User user)
+}
+
+class User {
+    + String id
+    + String username
+    + String email
+    + String password
+    + boolean twoFactorEnabled
+    + String role
+}
+
+class DAOChild {
+    + Child[] Children
+    + getChildByUserId(User id)
+    + getChildById(String id)
+}
+
+class Child {
+    + int child_id
+    + String child_name
+    + String state
+    + Tap last_tap
+}
+
+class Tap {
+    + int sleep_total
+    + int time_slept
+    + int time_remaining
+    + Date start_date
+    + Date end_date
+}
+
+class Authenticator {
+    + boolean verifyCredentials(String username, String password)
+    + boolean send2FACode(User user)
+}
+
+class Doctor {
+    + String id
+    + String name
+    + List<Child> assignedChildren
+    + viewMedicalHistory(String child_id)
+}
+
+class Caregiver {
+    + String id
+    + String name
+    + List<Child> caredChildren
+    + viewChildInfo(String child_id)
+}
+
+class Database {
+    + boolean storeUser(User user)
+    + User fetchUser(String username)
+    + Child fetchChild(String id)
+    + boolean storeChild(Child child)
+}
+
+Webservice --> DAOUser: demana info user
+DAOUser --> User: obté info user
+DAOUser --> Webservice: respon amb info user \n si existeix
+Webservice --> DAOChild: demana info child
+DAOChild --> Child: obté info child
+DAOChild --> Webservice: respon info child \n si existeix
+DAOChild --> Tap: obté amb info tap del child
+Webservice --> Authenticator: valida autenticació
+Authenticator --> Webservice: retorna validació
+Webservice --> Database: guarda dades d'usuari
+Database --> Webservice: confirma registre
