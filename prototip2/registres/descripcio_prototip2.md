@@ -10,9 +10,9 @@
 
 
 ***Base de dades***:
-    - Usuaris: Informació dels cuidadors, infants i metges.
-    - Infants: Dades específiques de cada nen, incloent el tractament a seguir.
-    - Relacions: Vincle entre cuidadors i infants per gestionar correctament el tractament.
+- Usuaris: Informació dels cuidadors, infants i metges.
+- Infants: Dades específiques de cada nen, incloent el tractament a seguir.
+- Relacions: Vincle entre cuidadors i infants per gestionar correctament el tractament.
 
 
 ### Frontend:
