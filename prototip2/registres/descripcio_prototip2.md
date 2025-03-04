@@ -17,7 +17,7 @@
 
 ### Frontend:
 
-[Frontend prototip 2](dgrm_class_frontend_p2.mermaid)
+[Frontend prototip 2](dgm_clase_frontendprototip2.mermaid)
 
 ***Vista de Login***:
 - Descripció: pantalla de Login on l'usuari es validarà

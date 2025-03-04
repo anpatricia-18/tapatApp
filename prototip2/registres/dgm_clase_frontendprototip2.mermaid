@@ -1,0 +1,83 @@
+---
+title: Diagrama de classes FrontEnd Prototip2
+---
+class LoginView {
+    + showLoginForm()
+    + validateInputs(String username, String password)
+    + sendLoginRequest(String username, String password)
+    + showErrorMessage(String message)
+}
+
+class RegisterView {
+    + showRegisterForm()
+    + validateInputs(User user)
+    + sendRegisterRequest(User user)
+    + showSuccessMessage()
+}
+
+class UserDashboard {
+    + displayUserInfo(User user)
+    + navigateToChildView()
+    + navigateToMedicalHistory()
+}
+
+class ChildView {
+    + displayChildInfo(Child child)
+    + showTapInfo(Tap tap)
+}
+
+class MedicalHistoryView {
+    + displayMedicalRecords(List<String> records)
+}
+
+class UserDAO {
+    + List Users
+    + getAllUsers(): List
+    + getUserByUsername(): dict
+}
+
+class ChildDAO {
+    + List Children
+    + getChildren(): List
+    + getChildByUserId(User id): obj Child
+}
+
+namespace Classes_Utilitzades {
+    class User {
+        - int id
+        + String username
+        + String email
+        - String password
+        + boolean twoFactorEnabled
+        + String role
+    }
+    
+    class Child {
+        - int child_id
+        + String child_name
+        + int edat
+        + String state
+        + Tap last_tap
+    }
+    
+    class Tap {
+        + int sleep_total
+        + int time_slept
+        + int time_remaining
+        + Date start_date
+        + Date end_date
+    }
+    
+    class Error {
+        + int code
+        + String descripcio
+    }
+}
+
+LoginView ..> Authenticator: "Valida credencials"
+Authenticator ..> LoginView: "Retorna validació"
+LoginView ..> UserDashboard: "Login victoriós"
+RegisterView ..> UserDashboard: "Registro victoriós"
+UserDashboard ..> ChildView: "Accedeix a vista infantil"
+UserDashboard ..> MedicalHistoryView: "Consulta historial mèdic"
+ChildView ..> Tap: "Mostra info del tap"
