@@ -2,7 +2,7 @@ from flask import Flask, jsonify, request
 
 app = Flask(__name__)
 
-# Datos de ejemplo
+# Dade d'exemple
 children = [
     {"id": 1, "name": "Child 1"},
     {"id": 2, "name": "Child 2"}
