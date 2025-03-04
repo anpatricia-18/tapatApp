@@ -1,0 +1,57 @@
+flowchart TD
+    %% Client (Usuari)
+    subgraph Client [Client]
+        A[Vista de Benvinguda] -->|Login o Registre| B[Vista de Login]
+        
+        %% Login i Registre
+        B -->|Introdueix credencials| C[Client DAO]
+        B -->|He oblidat la contrasenya| R[Vista Restablir Contrasenya]
+        R -->|Envia sol·licitud| C
+        B -->|Nou usuari| S[Vista de Registre]
+        S -->|Envia dades| C
+
+        %% Validació d'usuari
+        C -->|Petició HTTP| SAPI[Servidor API]
+        SAPI -->|Validació| D[Server DAO Users]
+        D -->|Consulta Base de Dades| DB[Base de Dades]
+        DB -->|Retorna dades| D
+        D -->|Retorna resposta| SAPI
+        SAPI -->|Usuari validat| E[Vista segons rol]
+
+        %% Accés segons rol
+        E -->|Cuidador| F[Vista Cuidador]
+        E -->|Infant| G[Vista Infant]
+        E -->|Metge| H[Vista Metge]
+    end
+
+    %% Servidor
+    subgraph Servidor [Servidor]
+        SAPI[Webservice API] -->|Validació d'usuari| D[Server DAO Users]
+        SAPI -->|Gestió de nens| I[Server DAO Child]
+        
+        %% Base de Dades
+        D -->|Consulta usuaris| DB[Base de Dades]
+        I -->|Consulta nens| DB
+    end
+
+    %% Base de Dades
+    subgraph Base_de_Dades [Base de Dades]
+        DB[(BBDD)]
+    end
+
+    %% Vista Cuidador - Gestió de nens
+    F -->|Consulta nens| I
+    I -->|Recupera nens associats| DB
+    I -->|Retorna dades| F
+    F -->|Selecciona nen| L[Vista Informació del Nen]
+    F -->|Afegir nen| M[Vista Afegir Nen]
+    M -->|Envia dades| I
+
+    %% Vista Metge - Historial mèdic
+    H -->|Consulta historial mèdic| J[Consulta Metge - DAO]
+    J -->|Consulta BBDD| DB
+    J -->|Retorna historial| H
+
+    %% Vista Infant - Estat del tractament
+    G -->|Consulta estat actual| K[Dormit, Amb parche, Sense parche]
+
