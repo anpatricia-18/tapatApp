@@ -12,7 +12,7 @@ users = [
     User(id=1, username="mare", password="12345", email="prova@gmail.com"),
     User(id=2, username="pare", password="123", email="prova2@gmail.com")
 ]
-
+#Crear les classes Child, Tap, Role, Status i Treatment
 class Child:
     def __init__(self, id, child_name, sleep_average, treatment_id, time):
         self.id = id
@@ -39,6 +39,15 @@ taps = [
     Tap(id=1, child_id=1, status_id=1, user_id=1, init="2024-12-18T19:42:43", end="2024-12-18T20:42:43"),
     Tap(id=2, child_id=2, status_id=2, user_id=2, init="2024-12-18T21:42:43", end="2024-12-18T22:42:43")
 ]
+#Classe Relació
+class RelationUserChild:
+    def __init__(self, user_id, child_id, rol_id):
+        self.user_id = user_id
+        self.child_id = child_id
+        self.rol_id = rol_id
+
+    def __str__(self):
+        return f"USer: {self.user_id}, Child: {self.child_id}, Rol: {self.rol_id}
 
 relation_user_child = [
     {"user_id": 1, "child_id": 1, "role_id": 1},
