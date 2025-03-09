@@ -26,7 +26,7 @@ class Child:
 
 
 class APIClient:
-    BASE_URL = "http://localhost:5000/prototip"  # Port on s'executa el servidor
+    BASE_URL = "http://localhost:5000/prototip"  
 
     @staticmethod
     def login(username, password):
@@ -51,7 +51,7 @@ class APIClient:
                 children_data = response.json()
                 return [Child(c["id"], c["name"], c["sleep_average"], c["treatment"], c["time"]) for c in children_data]
             else:
-                print(f"Error: {response.json().get('error', 'No s\'han trobat infants')}")
+                print(f"Error: {response.json().get('error', 'No han trobat infants')}")
                 return []
         except Exception as e:
             print(f"Error de connexió: {e}")
