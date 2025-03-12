@@ -1,7 +1,5 @@
 import requests
 
-BASE_URL = "http://192.168.144.160:10050"
-
 class User:
     def __init__(self, id, username, email, role):
         self.id = id
@@ -26,8 +24,7 @@ class Child:
 
 
 class APIClient:
-    BASE_URL = "http://localhost:5000/prototip"  
-
+    BASE_URL = "http://localhost:5000/prototip"  # Port on s'executa el servidor
     @staticmethod
     def login(username, password):
         try:
@@ -51,7 +48,7 @@ class APIClient:
                 children_data = response.json()
                 return [Child(c["id"], c["name"], c["sleep_average"], c["treatment"], c["time"]) for c in children_data]
             else:
-                print(f"Error: {response.json().get('error', 'No han trobat infants')}")
+                print(f"Error: {response.json().get('error', 'No hem trobat infants')}")
                 return []
         except Exception as e:
             print(f"Error de connexió: {e}")
