@@ -1,0 +1,59 @@
+sequenceDiagram
+    participant u as Usuari
+    participant a as App
+    participant s as Servidor (DAO)
+    participant b as Base de Dades
+
+    %% Login
+    u->>a: Introdueix username/email i password
+    a->>s: Envia credencials
+    s->>b: Verifica credencials
+    alt Credencials Correctes
+        b->>s: Retorna dades usuari
+        s->>s: Valida autenticació
+        alt 2FA Activat
+            s->>a: Sol·licita codi 2FA
+            a->>u: Demana codi 2FA
+            u->>a: Introdueix codi 2FA
+            a->>s: Envia codi 2FA
+            s->>s: Verifica 2FA
+        end
+        s->>a: Autenticació correcta
+        a->>u: Redirecciona a vista d'usuari
+    else Credencials Incorrectes
+        b->>s: Credencials KO
+        s->>a: Error d'autenticació
+        a->>u: Mostra missatge d'error
+    else Usuari No Existeix
+        b->>s: Usuari no trobat
+        s->>a: Usuari no existeix
+        a->>u: Mostra "Usuari no registrat"
+    end
+
+    %% Registre
+    u->>a: Introdueix dades registre
+    a->>s: Envia dades registre
+    s->>b: Guarda nou usuari
+    b->>s: Confirma registre
+    s->>a: Registre completat
+    a->>u: Mostra confirmació
+
+    %% Accés post-login
+    alt Rol: Cuidador
+        u->>a: Accedeix a vista cuidador
+        a->>s: Sol·licita infants associats
+        s->>b: Consulta infants
+        b->>s: Retorna llista infants
+        s->>a: Envia dades infants
+        a->>u: Mostra llista infants
+    else Rol: Infant
+        u->>a: Accedeix a vista infant
+        a->>u: Mostra interfície infantil
+    else Rol: Metge
+        u->>a: Accedeix a vista metge
+        a->>s: Sol·licita historial mèdic
+        s->>b: Consulta historial
+        b->>s: Retorna dades
+        s->>a: Envia historial
+        a->>u: Mostra panell metge
+    end
