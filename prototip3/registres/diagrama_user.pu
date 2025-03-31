@@ -3,12 +3,10 @@ left to right direction
 
 actor "Usuari" as generic_user
 actor "Cuidador Principal" as tutor_user
-actor "Cuidador Secundari 1" as cuidador_user1
-actor "Cuidador Secundari 2" as cuidador_user2
+actor "Cuidador Secundari" as cuidador_user
 actor "Metge" as user_metge
 tutor_user -|> generic_user
-cuidador_user1 -|> generic_user
-cuidador_user2 -|> generic_user
+cuidador_user -|> generic_user
 
 usecase "Login" as UC1
 usecase "Consulta Infant" as UC2
@@ -30,12 +28,9 @@ tutor_user -- UC5
 tutor_user -- UC9
 tutor_user -- UC10
 tutor_user -- UC11
-cuidador_user1 -- UC2
-cuidador_user1 -- UC4
-cuidador_user1 -- UC5
-cuidador_user2 -- UC2
-cuidador_user2 -- UC4
-cuidador_user2 -- UC5
+cuidador_user -- UC2
+cuidador_user -- UC4
+cuidador_user -- UC5
 user_metge -- UC10
 user_metge -- UC11
 
@@ -43,3 +38,4 @@ UC2 <-- UC6 : include
 UC4 <.. UC7 : extends
 UC5 <-- UC8 : include
 @enduml
+       
