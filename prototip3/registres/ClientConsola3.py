@@ -33,50 +33,94 @@ class APIClient:
     @staticmethod
     def login(username, password):
         try:
-            response = requests.post(f"{APIClient.BASE_URL}/login", json={"username": username, "password": password})
-            if response.status_code == 200:
-                data = response.json()
-                APIClient.token = data["token"]  # Guardem el token per a futures peticions
-                print("El login està ben fet!")
-                return User(data['id'], data['username'], data['email']) 
-            else:
-                print(f"Error: {response.json().get('error', 'Usuari o contrasenya incorrectes')}")
+            response = requests.post(
+                f"{APIClient.BASE_URL}/login",
+                json={"username": username, "password": password},
+                timeout=5  # Afegim timeout per evitar esperes infinites
+            )
+            
+            response.raise_for_status()  # Això llançarà una excepció per codis 4XX/5XX
+            
+            data = response.json()
+            APIClient.token = data.get("token")  # Utilitzem .get() per evitar KeyError
+            if not APIClient.token:
+                print("Error: El servidor no ha retornat cap token")
                 return None
-        except Exception as ex:
-            print(f"Connection Error: {ex}")
+                
+            print("Login exitós!")
+            return User(
+                data.get('id'),
+                data.get('username'),
+                data.get('email')
+            )
+            
+        except requests.exceptions.RequestException as ex:
+            print(f"Error de connexió: {ex}")
+            return None
+        except ValueError as ex:
+            print(f"Error en el format de la resposta: {ex}")
             return None
     
     @staticmethod
     def get_user(username):
         if not APIClient.token:
-            print("No hi ha cap usuari autenticat.")
+            print("Error: No hi ha cap usuari autenticat.")
             return None
-        headers = {"Authorization": APIClient.token}
+            
+        headers = {"Authorization": f"Bearer {APIClient.token}"}  # Format estàndard per a tokens
 
         try:    
-            response = requests.get(f"{APIClient.BASE_URL}/getuser", headers=headers)
-            if response.status_code == 200:
-                data = response.json()
-                return User(data['id'], data['username'], data['email'])
-            else:
-                print(f"Error: {response.json().get('error', 'No es pot obtenir a usuari')}")
+            response = requests.get(
+                f"{APIClient.BASE_URL}/getuser",
+                headers=headers,
+                timeout=5
+            )
+            response.raise_for_status()
+            
+            data = response.json()
+            return User(
+                data.get('id'),
+                data.get('username'),
+                data.get('email')
+            )
+            
+        except requests.exceptions.RequestException as ex:
+            print(f"Error de connexió: {ex}")
             return None
-        except Exception as ex:
-            print(f"Connection Error: {ex}")
+        except ValueError as ex:
+            print(f"Error en el format de la resposta: {ex}")
             return None
 
     @staticmethod
     def get_children(username):
         try:    
-            response = requests.get(f"{APIClient.BASE_URL}/getchildren/{username}")
-            if response.status_code == 200:
-                children_data = response.json()
-                return [Child(child['id'], child['name'], child['sleep_average'], child['treatment'], child['time']) for child in children_data]
-            else:
-                print(f"Error: {response.json().get('error', 'No es poden obtenir als nens')}")
-                return None
-        except Exception as ex:
-            print(f"Connection Error: {ex}")
+            response = requests.get(
+                f"{APIClient.BASE_URL}/getchildren/{username}",
+                timeout=5
+            )
+            response.raise_for_status()
+            
+            children_data = response.json()
+            if not isinstance(children_data, list):
+                print("Error: Format de resposta inesperat")
+                return []
+                
+            return [
+                Child(
+                    child.get('id'),
+                    child.get('name'),
+                    child.get('sleep_average'),
+                    child.get('treatment'),
+                    child.get('time')
+                ) 
+                for child in children_data
+            ]
+            
+        except requests.exceptions.RequestException as ex:
+            print(f"Error de connexió: {ex}")
+            return []
+        except ValueError as ex:
+            print(f"Error en el format de la resposta: {ex}")
             return []
 
 # creem la classe ConsoleView per a gestionar la interacció amb l'usuari
@@ -88,34 +132,48 @@ class ConsoleView:
         username = input("Introdueix el teu nom d'usuari: ")
         password = input("Introdueix la teva contrasenya: ")  
         ConsoleView.logged_user = APIClient.login(username, password)
+        if not ConsoleView.logged_user:
+            print("No s'ha pogut iniciar sessió. Torna-ho a provar.")
 
     @staticmethod
-    def Menu():
-        print("1. Menu")
-        print("2. Consultar informació del user")
-        print("3. Consultar informació dels nens del user")
-        print("4. Bye Bye!")
+    def show_menu():
+        print("\n--- MENÚ ---")
+        print("1. Veure les meves dades")
+        print("2. Consultar informació dels nens")
+        print("3. Sortir")
 
     @staticmethod
     def run():
-        print("Benvingut a l'aplicació TapatApp!")
-        ConsoleView.login()
-        if ConsoleView.logged_user:
-            while True:
-                ConsoleView.Menu()
-                option = input("Introdueix una opció: ")
-                if option == "1":
-                    print(ConsoleView.logged_user)
-                elif option == "2":
-                    children = APIClient.get_children(ConsoleView.logged_user.username)
-                    if children:
-                        for child in children:
-                            print(child)
-                elif option == "3":
-                    print("Bye Bye!")
-                    break
+        print("Benvingut/da a l'aplicació TapatApp!")
+        
+        while True:
+            ConsoleView.login()
+            if ConsoleView.logged_user:
+                break
+                
+        while True:
+            ConsoleView.show_menu()
+            option = input("Introdueix una opció (1-3): ").strip()
+            
+            if option == "1":
+                print("\nLes teves dades:")
+                print(ConsoleView.logged_user)
+                
+            elif option == "2":
+                print("\nInformació dels nens:")
+                children = APIClient.get_children(ConsoleView.logged_user.username)
+                if children:
+                    for child in children:
+                        print(child)
                 else:
-                    print("Opció no vàlida. Torna-ho a intentar.")
+                    print("No s'han trobat nens o hi ha hagut un error.")
+                    
+            elif option == "3":
+                print("\nFins aviat! Adeu!")
+                break
+                
+            else:
+                print("Opció no vàlida. Si us plau, tria una opció entre 1 i 3.")
 
 if __name__ == "__main__":
     ConsoleView.run()
