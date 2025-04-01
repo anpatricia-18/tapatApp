@@ -59,7 +59,7 @@ class APIClient:
                 data = response.json()
                 return User(data['id'], data['username'], data['email'])
             else:
-                print(f"Error: {response.json().get('error', 'No es pot obtenir l\'usuari')}")
+                print(f"Error: {response.json().get('error', 'No es pot obtenir a usuari')}")
             return None
         except Exception as ex:
             print(f"Connection Error: {ex}")
