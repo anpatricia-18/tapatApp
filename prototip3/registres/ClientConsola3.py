@@ -37,7 +37,7 @@ class APIClient:
             if response.status_code == 200:
                 data = response.json()
                 APIClient.token = data["token"]  # Guardem el token per a futures peticions
-                print("El login no està ben fet!")
+                print("El login està ben fet!")
                 return User(data['id'], data['username'], data['email']) 
             else:
                 print(f"Error: {response.json().get('error', 'Usuari o contrasenya incorrectes')}")
