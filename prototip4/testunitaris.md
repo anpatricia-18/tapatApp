@@ -1,17 +1,38 @@
 # Activitats
 1- (testunitaris.md) Què són els tests unitaris?
+
 Són tests automàtics que comproven que les parts individuals del codi (funcions, mètodes o classes) funcionen bé. Ajuden a: 
 - **Detectar falles abans de la seva publicació**. 
 - **Assegurar que el codi opera com es vol.**
--**Fer més senzill el manteniment del codi.** 
+- **Fer més senzill el manteniment del codi.** 
 
-2- (testunitaris.md) Fes una recerca de llibreries de test amb Python.  Com funciona específicament la 
-llibreria unittest de Python?
+2- (testunitaris.md) Fes una recerca de llibreries de test amb Python. Com funciona específicament la llibreria unittest de Python?
+
 # Llibreries conegudes per a proves en Python
 
-- **unittest** (inclosa dins de la biblioteca estàndard).  
-- **pytest** (més fàcil i potent).  
-- **nose2** (millora de `nose`, que funciona amb `unittest`).  
+- **unittest**: (inclosa dins de la biblioteca estàndard).  
+
+- Basat en el framework de proves unitàries de Java (JUnit).
+- Permet crear proves amb **TestCase**, **assertEqual**, **setUp**, **tearDown**...
+
+## **pytest** (més simple i fliexible).  
+
+- No requereix classes per escriure proves.
+- Compatible amb **unittest**.
+- Permet fixtures (cosa fixa), parametrització i plugins.
+
+## **nose2** (millora de `nose`, que funciona amb `unittest`).  
+
+- Extend a **unittest** i ofereix auto-descobriment de proves.
+- Menys popular que **pythest** peò amb utilitat.
+
+## **doctest** (natiu): 
+- Permet escriure proves dintre de la documentació de proves.
+- Compara la sortida esperada amb la real directament en docstrings.
+
+## **hypothesis**:
+- Permet proves basades en propietats generant dades aleatòries.
+- Útil per proves de casos límit i entrades inesperades.
 
 ## Com opera unittest?
 
