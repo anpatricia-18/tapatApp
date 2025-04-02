@@ -54,6 +54,5 @@
 ##  Diagrama d'arquitectura final del Prototip 2
 [Arquitectura prototip 2](dgm_arquitecturap2.mermaid)
 
-## Test Unitaris del Prototip 4
-[Test Unitaris prototip 4](testunitaris.md)
+
 
