@@ -66,3 +66,6 @@ Què necessitem per cada End-point
 
 ## Descripció d'objectius a implementar del Prototip 2 
 [Objectius a implementar del prototip 2](/prototip2/registres/descripcio_prototip2.md)
+
+## Test Unitaris del Prototip 4
+[Test Unitaris prototip 4](testunitaris.md)
