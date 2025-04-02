@@ -46,13 +46,14 @@ Són tests automàtics que comproven que les parts individuals del codi (funcion
 3-  (prototip3/testsuma.py) Exercici exemple test.
 Creació i execució d’un test senzill  amb Python per exemple testejar una funció de suma. Genera un fitxer python que testeji aquesta funció.
 
+```python
 def suma(a, b):
     """Retorna la suma de dos nombres."""
     return a + b
 
 4- (prototip3/testfuncions.py) Exercici exemple varies  funcions.
 Testeja més funcions, afegeix una resta i una divisió (que retorni un error quan la divisió és per 0)  
-
+```python
 def resta(a, b):
     """Retorna la resta de dos nombres."""
     return a - b
