@@ -73,4 +73,4 @@ def divideix(a, b):
 - **assertIsNone(a,b)**: Revisa que a estigui en b (llista, diccionari...).
 - **assertRaises(Error, funció)**: Revisa que la funció llença una excepció.
 
-6-  (prototip3/testBackend.py)  Fes els tests Unitaris dels teus DAO i webservice del prototip 2 que tens a la carpeta prototip 3
+6-  (prototip3/testBackend.py)  Fes els tests Unitaris dels teus DAO i webservice del prototip 2 que tens a la carpeta prototip 4
