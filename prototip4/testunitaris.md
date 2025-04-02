@@ -50,6 +50,7 @@ Creació i execució d’un test senzill  amb Python per exemple testejar una fu
 def suma(a, b):
     """Retorna la suma de dos nombres."""
     return a + b
+```
 
 4- (prototip3/testfuncions.py) Exercici exemple varies  funcions.
 Testeja més funcions, afegeix una resta i una divisió (que retorni un error quan la divisió és per 0)  
@@ -59,11 +60,13 @@ def resta(a, b):
     """Retorna la resta de dos nombres."""
     return a - b
 
+
 def divideix(a, b):
     """Retorna la divisió de dos nombres. Retorna 'Error' si b és 0."""
     if b == 0:
         return "Error: divisió per zero"
     return a / b
+```
 
 5-  (testunitaris.md) Fes una Llista de les assertions més importants en unittest i explica per a que  serveixen.
 
