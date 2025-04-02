@@ -53,6 +53,7 @@ def suma(a, b):
 
 4- (prototip3/testfuncions.py) Exercici exemple varies  funcions.
 Testeja més funcions, afegeix una resta i una divisió (que retorni un error quan la divisió és per 0)  
+
 ```python
 def resta(a, b):
     """Retorna la resta de dos nombres."""
