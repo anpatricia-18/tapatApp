@@ -1,6 +1,8 @@
 import mysql.connector
 
 def list_all_users():
+    connection = None
+    cursor = None
     try:
         # Conexión a la base de datos
         connection = mysql.connector.connect(
@@ -10,21 +12,24 @@ def list_all_users():
             database="tapatapp"
         )
 
-        cursor = connection.cursor()
-        # Consulta para obtener todos los registros de la tabla users
-        query = "SELECT * FROM users"
-        cursor.execute(query)
+        if connection.is_connected():
+            cursor = connection.cursor(dictionary=True)
+            query = "SELECT * FROM user"
+            cursor.execute(query)
 
-        # Recuperar y mostrar los resultados
-        users = cursor.fetchall()
-        for user in users:
-            print(user)
+            users = cursor.fetchall()
+            for user in users:
+                print(user)
+        else:
+            print("No se pudo establecer la conexión con la base de datos.")
 
     except mysql.connector.Error as error:
         print(f"Error al conectar a la base de datos: {error}")
+
     finally:
-        if connection.is_connected():
+        if cursor:
             cursor.close()
+        if connection and connection.is_connected():
             connection.close()
             print("Conexión cerrada.")
 
